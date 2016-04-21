@@ -108,8 +108,10 @@ public class SearchForm extends BaseForm {
         List<WebElement> list = beList.findElements("//div[@class='schema-product__title']/a[@data-bind='attr: {href: product.html_url}']/span[@data-bind='html: product.full_name']");
         info(String.valueOf(list.size()));
         for (int i=0; i<list.size(); i++) {
+            waitUntil("//div[@class='schema-filter-button__state schema-filter-button__state_initial schema-filter-button__state_disabled schema-filter-button__state_control']");
             list = beList.findElements("//div[@class='schema-product__title']/a[@data-bind='attr: {href: product.html_url}']/span[@data-bind='html: product.full_name']");
             list.get(i).click();
+            waitUntil("//div/h2[@class='catalog-masthead__title']");
             if ((resultForm.testName(manufacturer) == true) & (resultForm.testDiagonl(diagonalFrom, diagonalTo) == true) & (resultForm.testDate(date) == true) & (resultForm.testPrice(price) == true)) {
                     browser.goBack();
                 } else {
